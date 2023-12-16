@@ -39,23 +39,27 @@ for (let tile of tiles) {
 		let neighborCoords = [];
 		if (tileX % 2 === 0) {
 			neighborCoords.push({x: parseInt(tileX) - 1, y: parseInt(tileY)}); // up right
-			neighborCoords.push({x: parseInt(tileX) - 1, y: parseInt(tileY) - 1}); // up left
+			neighborCoords.push({x: parseInt(tileX), y: parseInt(tileY) + 1}); // right
 			neighborCoords.push({x: parseInt(tileX) + 1, y: parseInt(tileY)}); // down right
 			neighborCoords.push({x: parseInt(tileX) + 1, y: parseInt(tileY) - 1}); // down left
+			neighborCoords.push({x: parseInt(tileX), y: parseInt(tileY) - 1}); // left
+			neighborCoords.push({x: parseInt(tileX) - 1, y: parseInt(tileY) - 1}); // up left
 		} else {
 			neighborCoords.push({x: parseInt(tileX) - 1, y: parseInt(tileY) + 1}); // up right
-			neighborCoords.push({x: parseInt(tileX) - 1, y: parseInt(tileY)}); // up left
+			neighborCoords.push({x: parseInt(tileX), y: parseInt(tileY) + 1}); // right
 			neighborCoords.push({x: parseInt(tileX) + 1, y: parseInt(tileY) + 1}); // down right
 			neighborCoords.push({x: parseInt(tileX) + 1, y: parseInt(tileY)}); // down left
+			neighborCoords.push({x: parseInt(tileX), y: parseInt(tileY) - 1}); // left
+			neighborCoords.push({x: parseInt(tileX) - 1, y: parseInt(tileY)}); // up left
 		}
-		neighborCoords.push({x: parseInt(tileX), y: parseInt(tileY) + 1}); // right
-		neighborCoords.push({x: parseInt(tileX), y: parseInt(tileY) - 1}); // left
 
 		// show neighbors
-		neighborCoords.forEach(coords => {
-			if (coords.x < size && coords.y < size && coords.x >= 0 && coords.y >= 0) {
-				document.querySelector(`[data-tile-row="${coords.x}"][data-tile-col="${coords.y}"]`).classList.add("neighbor");
-			}
+		neighborCoords.forEach((coords, i) => {
+			setTimeout(() => {
+				if (coords.x < size && coords.y < size && coords.x >= 0 && coords.y >= 0) {
+					document.querySelector(`[data-tile-row="${coords.x}"][data-tile-col="${coords.y}"]`).classList.add("neighbor");
+				};
+			}, i * 100);
 		});
 	})
 }
