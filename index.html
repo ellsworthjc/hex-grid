@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>A* Pathfinding | V1</title>
+</head>
+<body>
+	<section id="hex-grid"></section>
+	<script src="index.js" type="module"></script>
+</body>
+</html>
+
+<style>
+	:root {
+		--bg: #234;
+		--tileSize: 3rem;
+		--gap: 6;
+	}
+
+	body {
+		background-color: var(--bg);
+	}
+
+	#hex-grid {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.hex-tile {
+		fill: transparent;
+		stroke: white;
+		cursor: pointer;
+		transition: all 200ms;
+	}
+	.hex-tile:hover,
+	.hex-tile:focus {
+		fill: #aff;
+		stroke: #aff;
+	}
+
+	.grid-row {
+		display: flex;
+		gap: calc(var(--tileSize) / var(--gap));
+		margin-top: calc(0rem - (var(--tileSize) / var(--gap)));
+	}
+
+	.grid-row:nth-child(even) {
+		margin-left: calc((var(--tileSize) / 2) + (var(--tileSize) / (var(--gap) * 2)));
+	}
+
+	.hexagon-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: var(--tileSize);
+		aspect-ratio: 1 / 1.1547; /* The aspect ratio of a regular hexagon */
+		background-color: red;
+		clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+		cursor: pointer;
+		transition: all 150ms;
+	}
+
+	.hexagon-container:hover:not(.selected),
+	.hexagon-container:focus:not(.selected) {
+		background-color: brown;
+	}
+
+	.selected {
+		background-color: lightblue;
+	}
+
+	.selected .hexagon {
+		background-color: lightblue;
+	}
+
+	.neighbor {
+		background-color: greenyellow;
+	}
+
+	.neighbor .hexagon {
+		background-color: greenyellow;
+	}
+
+	.hexagon {
+		width: calc(var(--tileSize) - .5rem); /* what is subtracted here becomes the "border" of the hexagon */
+		aspect-ratio: 1 / 1.1547; /* The aspect ratio of a regular hexagon */
+		background-color: var(--bg);
+		clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+		filter: drop-shadow(10px 10px 1rem white);
+	}
+</style>
